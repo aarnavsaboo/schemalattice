@@ -1,0 +1,15 @@
+namespace: com.example.orders
+version: "1.0.0"
+record:
+  name: Order
+  fields:
+    - name: order_id
+      type: string
+      required: true
+    - name: total_cents
+      type: long
+      required: true
+    - name: status
+      type: enum
+      values: [PENDING, PAID, SHIPPED]
+      required: true

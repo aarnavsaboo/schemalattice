@@ -1,0 +1,54 @@
+namespace: com.example.orders
+version: "1.0.0"
+record:
+  name: Order
+  doc: "A single customer order placed through the storefront API."
+  fields:
+    - name: order_id
+      type: string
+      doc: "UUID assigned at order creation"
+      required: true
+
+    - name: total_cents
+      type: long
+      doc: "Total order value in minor currency units"
+      required: true
+
+    - name: status
+      type: enum
+      doc: "Current lifecycle state of the order"
+      values: [PENDING, PAID, SHIPPED, CANCELLED]
+      required: true
+
+    - name: placed_at
+      type: timestamp
+      required: true
+
+    - name: notes
+      type: string
+      required: false
+
+    - name: items
+      type: array
+      doc: "Line items in this order"
+      required: true
+      items:
+        type: record
+        name: OrderItem
+        fields:
+          - name: sku
+            type: string
+            required: true
+          - name: qty
+            type: int
+            default: 1
+          - name: unit_price_cents
+            type: long
+            required: true
+
+    - name: metadata
+      type: map
+      doc: "Arbitrary string tags attached by the storefront"
+      required: false
+      values:
+        type: string

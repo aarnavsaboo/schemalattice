@@ -1,0 +1,75 @@
+namespace: com.example.events
+version: "1.0.0"
+record:
+  name: UserActivityEvent
+  doc: "Analytics event emitted whenever a user performs a trackable action."
+  fields:
+    - name: event_id
+      type: string
+      required: true
+
+    - name: occurred_at
+      type: timestamp
+      required: true
+
+    - name: event_type
+      type: enum
+      values: [PAGE_VIEW, CLICK, PURCHASE, SIGNUP, LOGOUT]
+      required: true
+
+    - name: user
+      type: record
+      record_name: UserRef
+      fields:
+        - name: user_id
+          type: string
+          required: true
+        - name: is_authenticated
+          type: bool
+          default: false
+        - name: session
+          type: record
+          record_name: SessionInfo
+          required: false
+          fields:
+            - name: session_id
+              type: string
+              required: true
+            - name: device_type
+              type: enum
+              values: [DESKTOP, MOBILE, TABLET, UNKNOWN]
+              default: UNKNOWN
+
+    - name: context_tags
+      type: map
+      required: false
+      values:
+        type: string
+
+    - name: line_items
+      type: array
+      required: false
+      doc: "Populated only for PURCHASE events"
+      items:
+        type: record
+        name: LineItem
+        fields:
+          - name: product_id
+            type: string
+            required: true
+          - name: price_cents
+            type: long
+            required: true
+          - name: discounts
+            type: array
+            required: false
+            items:
+              type: record
+              name: Discount
+              fields:
+                - name: code
+                  type: string
+                  required: true
+                - name: amount_cents
+                  type: long
+                  required: true

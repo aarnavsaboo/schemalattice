@@ -1,0 +1,14 @@
+{
+  "order_id": "ord_4F92A1",
+  "total_cents": 4599,
+  "status": "PAID",
+  "placed_at": "2026-06-27T09:15:00Z",
+  "items": [
+    {"sku": "SKU-RED-L", "qty": 2, "unit_price_cents": 1500},
+    {"sku": "SKU-BLU-M", "qty": 1, "unit_price_cents": 1599}
+  ],
+  "metadata": {
+    "channel": "web",
+    "campaign": "summer_sale"
+  }
+}

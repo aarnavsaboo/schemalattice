@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "schemalattice"
+version = "0.1.0"
+description = "Define a schema once, generate JSON Schema, Protobuf, and Avro from it."
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.9"
+authors = [
+    { name = "schemalattice contributors" }
+]
+keywords = ["schema", "json-schema", "protobuf", "avro", "codegen", "data-engineering"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Software Development :: Libraries",
+]
+dependencies = [
+    "PyYAML>=6.0",
+    "jsonschema>=4.18",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "fastavro>=1.9",
+    "grpcio-tools>=1.60",
+]
+
+[project.urls]
+Homepage = "https://github.com/schemalattice/schemalattice"
+Issues = "https://github.com/schemalattice/schemalattice/issues"
+Changelog = "https://github.com/schemalattice/schemalattice/blob/main/CHANGELOG.md"
+
+[project.scripts]
+schemalattice = "schemalattice.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["schemalattice*"]
