@@ -1,0 +1,28 @@
+name: Daily activity
+
+on:
+  schedule:
+    - cron: "43 3 * * *"   # 09:13 AM IST daily
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update activity file
+        run: |
+          mkdir -p activity
+          echo "$(date -u +'%Y-%m-%dT%H:%M:%SZ') $(openssl rand -hex 8)" >> activity/log.txt
+
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+
+          git add activity/log.txt
+          git commit -m "chore: daily activity $(date -u +'%Y-%m-%d')" || exit 0
+          git push
