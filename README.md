@@ -1,5 +1,5 @@
 # schemalattice
-
+.
 Define a data schema once, in a single readable YAML file, and generate
 **JSON Schema**, **Protobuf**, and **Avro** from it — instead of hand
 authoring and manually keeping three schema files in sync.
